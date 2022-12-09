@@ -57,7 +57,8 @@
             // #9
             Console.WriteLine("#9");
             string headMovement = File.ReadAllText(inputFolder + "9.txt");
-            Console.WriteLine("Head visited positions: " + Day9.GetVisitedPositions(headMovement));
+            Console.WriteLine("Head visited positions: " + Day9.GetTailVisitedPositions(headMovement, 2));
+            Console.WriteLine("Head visited positions (part 2): " + Day9.GetTailVisitedPositions(headMovement, 10));
         }
     }
 }
