@@ -53,6 +53,11 @@
             string treeMap = File.ReadAllText(inputFolder + "8.txt");
             Console.WriteLine("Visible trees: " + Day8.GetVisibleTrees(treeMap));
             Console.WriteLine("Scenic score: " + Day8.GetScenicScore(treeMap));
+
+            // #9
+            Console.WriteLine("#9");
+            string headMovement = File.ReadAllText(inputFolder + "9.txt");
+            Console.WriteLine("Head visited positions: " + Day9.GetVisitedPositions(headMovement));
         }
     }
 }
