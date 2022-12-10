@@ -58,7 +58,13 @@
             Console.WriteLine("#9");
             string headMovement = File.ReadAllText(inputFolder + "9.txt");
             Console.WriteLine("Head visited positions: " + Day9.GetTailVisitedPositions(headMovement, 2));
-            Console.WriteLine("Head visited positions (part 2): " + Day9.GetTailVisitedPositions(headMovement, 10));
+            Console.WriteLine("Head visited positions (part 2): " + Day9.GetTailVisitedPositions(headMovement, 10) + "\n");
+
+            // #10
+            Console.WriteLine("#10");
+            string code = File.ReadAllText(inputFolder + "10.txt");
+            Console.WriteLine("Signal strength: " + Day10.GetSignalStrength(code, 20, 40, 220));
+            Console.WriteLine(Day10.GetScreen(code) + "\n");
         }
     }
 }
