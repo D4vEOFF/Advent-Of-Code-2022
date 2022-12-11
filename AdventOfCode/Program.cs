@@ -65,6 +65,12 @@
             string code = File.ReadAllText(inputFolder + "10.txt");
             Console.WriteLine("Signal strength: " + Day10.GetSignalStrength(code, 20, 40, 220));
             Console.WriteLine(Day10.GetScreen(code) + "\n");
+
+            // #11
+            Console.WriteLine("#11");
+            string monkeysAttributes = File.ReadAllText(inputFolder + "11.txt");
+            Console.WriteLine("Monkey Business: " + Day11.GetMonkeyBusiness(monkeysAttributes, 20, true));
+            Console.WriteLine("Monkey Business (part 2): " + Day11.GetMonkeyBusiness(monkeysAttributes, 10000, false));
         }
     }
 }
