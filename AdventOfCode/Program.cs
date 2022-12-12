@@ -71,6 +71,12 @@
             string monkeysAttributes = File.ReadAllText(inputFolder + "11.txt");
             Console.WriteLine("Monkey Business: " + Day11.GetMonkeyBusiness(monkeysAttributes, 20, true));
             Console.WriteLine("Monkey Business (part 2): " + Day11.GetMonkeyBusiness(monkeysAttributes, 10000, false));
+
+            // #12
+            Console.WriteLine("#12");
+            string map = File.ReadAllText(inputFolder + "12.txt");
+            Console.WriteLine("Shortest path to top: " + Day12.GetShortestPathToTop(map));
+            Console.WriteLine("Shortest path to top (part 2): " + Day12.GetShortestPathToTopFromGround(map));
         }
     }
 }
