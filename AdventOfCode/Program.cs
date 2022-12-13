@@ -77,6 +77,12 @@
             string map = File.ReadAllText(inputFolder + "12.txt");
             Console.WriteLine("Shortest path to top: " + Day12.GetShortestPathToTop(map));
             Console.WriteLine("Shortest path to top (part 2): " + Day12.GetShortestPathToTopFromGround(map));
+
+            // #12
+            Console.WriteLine("#13");
+            string packets = File.ReadAllText(inputFolder + "13.txt");
+            Console.WriteLine("Wrong packets order indices: " + Day13.GetWrongOrderIndices(packets));
+            Console.WriteLine("Decoder Key: " + Day13.GetDecoderKey(packets));
         }
     }
 }
