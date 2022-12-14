@@ -87,7 +87,8 @@
             // #14
             Console.WriteLine("#14");
             string cave = File.ReadAllText(inputFolder + "14.txt");
-            Console.WriteLine("Sand units at rest: " + Day14.GetUnitsOfSandAtRest(cave));
+            Console.WriteLine("Sand units at rest: " + Day14.GetUnitsOfSandAtRest(cave, false));
+            Console.WriteLine("Sand units at rest (part 2): " + Day14.GetUnitsOfSandAtRest(cave, true));
         }
     }
 }

@@ -22,10 +22,10 @@
             private int _HighestRockPosition { get; set; }
             private int _LeftmostRockPosition { get; set; }
             private int _RightmostRockPosition { get; set; }
-            public List<Point2D> _Rocks { get; private set; }
+            private HashSet<Point2D> _Rocks { get; set; }
             public IReadOnlyList<Point2D> Rocks
             {
-                get => _Rocks;
+                get => _Rocks.ToList();
             }
             private HashSet<SandUnit> _Sand { get; set; }
             public IReadOnlyList<Point2D> Sand
@@ -38,7 +38,7 @@
             public Point2D SandSource { get; private set; }
             public Cave(List<Point2D> rocks, Point2D sandSource)
             {
-                _Rocks = rocks;
+                _Rocks = rocks.ToHashSet();
                 _Sand = new HashSet<SandUnit>();
                 SandSource = sandSource;
 
@@ -55,7 +55,7 @@
                     .Select(x => x.Y)
                     .Max();
             }
-            public bool ProgressSimulation()
+            public bool ProgressSimulation(bool considerGround)
             {
                 SandUnit sandUnit = null;
 
@@ -69,9 +69,9 @@
 
                 _Sand.Add(sandUnit);
 
-                List<Point2D> sandPositions = _Sand.Select(x => x.Position).ToList();
+                HashSet<Point2D> sandPositions = _Sand.Select(x => x.Position).ToHashSet();
 
-                // Fall
+                // Simulate fall
                 while (true)
                 {
                     Point2D posBelow = sandUnit.Position + new Point2D(0, 1);
@@ -85,24 +85,44 @@
                         sandUnit.Position = posDiagLeft;
                     else if (!Rocks.Contains(posDiagRight) && !sandPositions.Contains(posDiagRight))
                         sandUnit.Position = posDiagRight;
+                    // Sand unit is blocked
                     else
                     {
                         sandUnit.State = SandUnitState.Blocked;
                         break;
                     }
 
-                    // Sand unit is falling down the abyss
-                    if (sandUnit.Position.Y >= _LowestRockPosition)
+                    // Sand unit is falling down the abyss or fell on the ground
+                    if (considerGround && sandUnit.Position.Y == _LowestRockPosition + 1)
+                    {
+                        sandUnit.State = SandUnitState.Blocked;
+                        break;
+                    }
+                    if (!considerGround && sandUnit.Position.Y >= _LowestRockPosition)
                         return false;
                 }
+
+                // Sand unit is blocked on the sand source
+                if (considerGround && sandUnit.State == SandUnitState.Blocked &&
+                        sandUnit.Position == SandSource)
+                    return false;
+
                 return true;
             }
             public override string ToString()
             {
                 string cave = "";
-                for (int j = Math.Min(_HighestRockPosition, SandSource.Y); j <= Math.Max(_LowestRockPosition, SandSource.Y); j++)
+
+                int minSandPosX = _Sand.Select(x => x.Position.X).Min();
+                int maxSandPosX = _Sand.Select(x => x.Position.X).Max();
+
+                int minX = (new int[] { _LeftmostRockPosition, SandSource.X, minSandPosX }).Min();
+                int maxX = (new int[] { _RightmostRockPosition, SandSource.X, maxSandPosX }).Max();
+
+                for (int j = Math.Min(_HighestRockPosition, SandSource.Y); 
+                    j <= Math.Max(_LowestRockPosition + 2, SandSource.Y); j++)
                 {
-                    for (int i = Math.Min(_LeftmostRockPosition, SandSource.X); i <= Math.Max(_RightmostRockPosition, SandSource.X); i++)
+                    for (int i = minX; i <= maxX; i++)
                     {
                         Point2D pos = new Point2D(i, j);
                         if (Rocks.Contains(pos))
@@ -158,19 +178,20 @@
 
             return new Cave(rocks, new Point2D(500, 0));
         }
-        internal static int GetUnitsOfSandAtRest(string caveStr)
+        internal static int GetUnitsOfSandAtRest(string caveStr, bool considerGround)
         {
             Cave cave = ParseInput(caveStr);
 
             bool result = false;
             do
             {
-                result = cave.ProgressSimulation();
+                result = cave.ProgressSimulation(considerGround);
+                //Console.WriteLine(cave.Sand.Count);
                 //Console.WriteLine(cave.ToString());
             }
             while (result);
 
-            return cave.Sand.Count - 1;
+            return considerGround ? cave.Sand.Count : cave.Sand.Count - 1;
         }
     }
 }
