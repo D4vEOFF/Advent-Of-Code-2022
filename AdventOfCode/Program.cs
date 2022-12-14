@@ -78,11 +78,16 @@
             Console.WriteLine("Shortest path to top: " + Day12.GetShortestPathToTop(map));
             Console.WriteLine("Shortest path to top (part 2): " + Day12.GetShortestPathToTopFromGround(map));
 
-            // #12
+            // #13
             Console.WriteLine("#13");
             string packets = File.ReadAllText(inputFolder + "13.txt");
             Console.WriteLine("Wrong packets order indices: " + Day13.GetWrongOrderIndices(packets));
             Console.WriteLine("Decoder Key: " + Day13.GetDecoderKey(packets));
+
+            // #14
+            Console.WriteLine("#14");
+            string cave = File.ReadAllText(inputFolder + "14.txt");
+            Console.WriteLine("Sand units at rest: " + Day14.GetUnitsOfSandAtRest(cave));
         }
     }
 }
