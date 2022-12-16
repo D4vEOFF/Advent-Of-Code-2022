@@ -94,6 +94,11 @@
                     Console.WriteLine("Empty positions: " + Day15.GetPossiblyEmptyPositions(beacons, 2000000));
                     Console.WriteLine("Tuning frequency: " + Day15.GetTuningFrequency(beacons));
                     break;
+                case 16:
+                    string valveStructure = File.ReadAllText(inputFolder + "16.txt");
+                    Console.WriteLine("Biggest pressure release: " + Day16.GetReleasablePressure(valveStructure, 30, false));
+                    Console.WriteLine("Biggest pressure release (part 2): " + Day16.GetReleasablePressure(valveStructure, 26, true));
+                    break;
                 default:
                     Console.WriteLine("Invalid day number.");
                     break;
