@@ -99,6 +99,11 @@
                     Console.WriteLine("Biggest pressure release: " + Day16.GetReleasablePressure(valveStructure, 30, false));
                     Console.WriteLine("Biggest pressure release (part 2): " + Day16.GetReleasablePressure(valveStructure, 26, true));
                     break;
+                case 17:
+                    string jetPushes = File.ReadAllText(inputFolder + "17.txt");
+                    Console.WriteLine("Tower height: " + Day17.GetTowerHeight(jetPushes, 2022));
+                    Console.WriteLine("Tower height (part 2): " + Day17.GetTowerHeight(jetPushes, 1000000000000));
+                    break;
                 default:
                     Console.WriteLine("Invalid day number.");
                     break;

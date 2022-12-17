@@ -3,14 +3,14 @@ namespace AdventOfCode
 {
     internal struct Point2D
     {
-        private int x;
-        private int y;
+        private long x;
+        private long y;
         /// <summary>
         /// X coordinate.
         /// </summary>
         public int X
         {
-            get => x;
+            get => (int)x;
             set => x = value;
         }
         /// <summary>
@@ -18,11 +18,32 @@ namespace AdventOfCode
         /// </summary>
         public int Y
         {
+            get => (int)y;
+            set => y = value;
+        }
+        /// <summary>
+        /// X coordinate as long.
+        /// </summary>
+        public long LongX
+        {
+            get => x;
+            set => x = value;
+        }
+        /// <summary>
+        /// Y coordinate as long.
+        /// </summary>
+        public long LongY
+        {
             get => y;
             set => y = value;
         }
 
         public Point2D(int x = 0, int y = 0)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        public Point2D(long x = 0, long y = 0)
         {
             this.x = x;
             this.y = y;
