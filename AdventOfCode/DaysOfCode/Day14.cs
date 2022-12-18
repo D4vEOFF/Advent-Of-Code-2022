@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode
+﻿using AdventOfCode.Utils;
+
+namespace AdventOfCode
 {
     internal class Day14
     {

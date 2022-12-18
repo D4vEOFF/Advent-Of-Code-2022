@@ -1,5 +1,4 @@
-﻿
-namespace AdventOfCode
+﻿namespace AdventOfCode.Utils
 {
     internal struct Vector3D
     {
@@ -96,15 +95,15 @@ namespace AdventOfCode
             this.z = z;
         }
         public override string ToString() => $"({x}, {y}, {z})";
-        public static Vector3D operator +(Vector3D p1, Vector3D p2) => 
+        public static Vector3D operator +(Vector3D p1, Vector3D p2) =>
             new Vector3D(p1.X + p2.X, p1.Y + p2.Y, p1.Z + p2.Z);
-        public static Vector3D operator -(Vector3D p1, Vector3D p2) => 
+        public static Vector3D operator -(Vector3D p1, Vector3D p2) =>
             new Vector3D(p1.X - p2.X, p1.Y - p2.Y, p1.Z - p2.Z);
-        public static Vector3D operator *(int m, Vector3D p) => 
+        public static Vector3D operator *(int m, Vector3D p) =>
             new Vector3D(m * p.X, m * p.Y, m * p.Z);
-        public static Vector3D operator /(Vector3D p, int d) => 
+        public static Vector3D operator /(Vector3D p, int d) =>
             new Vector3D(p.X / d, p.Y / d, p.Z / d);
-        public static bool operator ==(Vector3D p1, Vector3D p2) => 
+        public static bool operator ==(Vector3D p1, Vector3D p2) =>
             p1.X == p2.X && p1.Y == p2.Y && p1.Z == p2.Z;
         public static bool operator !=(Vector3D p1, Vector3D p2) => !(p1 == p2);
     }

@@ -1,5 +1,4 @@
-﻿
-namespace AdventOfCode
+﻿namespace AdventOfCode.Utils
 {
     internal struct Vector2D
     {
