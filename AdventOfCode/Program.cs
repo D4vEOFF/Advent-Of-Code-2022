@@ -104,6 +104,11 @@
                     Console.WriteLine("Tower height: " + Day17.GetTowerHeight(jetPushes, 2022));
                     Console.WriteLine("Tower height (part 2): " + Day17.GetTowerHeight(jetPushes, 1000000000000));
                     break;
+                case 18:
+                    string cubes = File.ReadAllText(inputFolder + "18.txt");
+                    Console.WriteLine("Visible faces: " + Day18.GetVisibleFaces(cubes));
+                    Console.WriteLine("Visible faces (part 2): " + Day18.GetVisibleFaces2(cubes));
+                    break;
                 default:
                     Console.WriteLine("Invalid day number.");
                     break;

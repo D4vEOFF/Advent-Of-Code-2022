@@ -5,14 +5,14 @@ namespace AdventOfCode
     {
         class Sensor
         {
-            public Point2D Position { get; private set; }
-            public Point2D ClosestBeacon { get; private set; }
+            public Vector2D Position { get; private set; }
+            public Vector2D ClosestBeacon { get; private set; }
             public int Manhattan
             {
                 get => Math.Abs(Position.X - ClosestBeacon.X) 
                     + Math.Abs(Position.Y - ClosestBeacon.Y);
             }
-            public Sensor(Point2D position, Point2D closestBeacon)
+            public Sensor(Vector2D position, Vector2D closestBeacon)
             {
                 Position = position;
                 ClosestBeacon = closestBeacon;
@@ -27,10 +27,10 @@ namespace AdventOfCode
                 {
                     string[] line = x.Split(":");
                     string[] sensorCoords = line[0].Split(", ");
-                    Point2D sensorPos = new Point2D(int.Parse(sensorCoords[0].Remove(0, 2)),
+                    Vector2D sensorPos = new Vector2D(int.Parse(sensorCoords[0].Remove(0, 2)),
                         int.Parse(sensorCoords[1].Remove(0, 2)));
                     string[] beaconCoords = line[1].Split(", ");
-                    Point2D beaconPos = new Point2D(int.Parse(beaconCoords[0].Remove(0, 2)),
+                    Vector2D beaconPos = new Vector2D(int.Parse(beaconCoords[0].Remove(0, 2)),
                         int.Parse(beaconCoords[1].Remove(0, 2)));
 
                     return new Sensor(sensorPos, beaconPos);
@@ -41,7 +41,7 @@ namespace AdventOfCode
         {
             Sensor[] sensors = ParseInput(map);
 
-            HashSet<Point2D> points = new HashSet<Point2D>();
+            HashSet<Vector2D> points = new HashSet<Vector2D>();
             foreach (var sensor in sensors)
             {
                 int residualManhattan = sensor.Manhattan - Math.Abs(sensor.Position.Y - line);
@@ -50,7 +50,7 @@ namespace AdventOfCode
                 for (int x = sensor.Position.X - residualManhattan; 
                     x <= sensor.Position.X + residualManhattan; x++)
                 {
-                    Point2D pos = new Point2D(x, line);
+                    Vector2D pos = new Vector2D(x, line);
 
                     // Beacon is present on the checked position
                     if (pos == sensor.ClosestBeacon)
@@ -62,7 +62,7 @@ namespace AdventOfCode
 
             return points.Count;
         }
-        private static int GetManhattan(Point2D p1, Point2D p2)
+        private static int GetManhattan(Vector2D p1, Vector2D p2)
         {
             return Math.Abs(p1.X - p2.X) + Math.Abs(p1.Y - p2.Y);
         }

@@ -8,19 +8,19 @@ namespace AdventOfCode
     {
         class Rock
         {
-            public List<Point2D> Parts { private set; get; }
-            public List<Point2D> PartsPositions { private set; get; }
-            public Point2D BottomLeftPosition { private set; get; }
-            public Rock(List<Point2D> parts, Point2D bottomLeftPosition)
+            public List<Vector2D> Parts { private set; get; }
+            public List<Vector2D> PartsPositions { private set; get; }
+            public Vector2D BottomLeftPosition { private set; get; }
+            public Rock(List<Vector2D> parts, Vector2D bottomLeftPosition)
             {
                 Parts = parts;
                 BottomLeftPosition = bottomLeftPosition;
 
-                PartsPositions = new List<Point2D>();
+                PartsPositions = new List<Vector2D>();
                 foreach (var part in parts)
                     PartsPositions.Add(part + bottomLeftPosition);
             }
-            public void PushByVector(Point2D vector)
+            public void PushByVector(Vector2D vector)
             {
                 BottomLeftPosition += vector;
                 for (int i = 0; i < PartsPositions.Count; i++)
@@ -29,24 +29,24 @@ namespace AdventOfCode
         }
         class RockChamber
         {
-            private List<Point2D>[] rockShapes = new List<Point2D>[]
+            private List<Vector2D>[] rockShapes = new List<Vector2D>[]
             {
-                new List<Point2D>(){ new Point2D(0,0), new Point2D(1,0),
-                new Point2D(2,0), new Point2D(3,0) },
+                new List<Vector2D>(){ new Vector2D(0,0), new Vector2D(1,0),
+                new Vector2D(2,0), new Vector2D(3,0) },
 
-                new List<Point2D>(){ new Point2D(1,2), new Point2D(0,1),
-                new Point2D(1,1), new Point2D(2,1), new Point2D(1,0) },
+                new List<Vector2D>(){ new Vector2D(1,2), new Vector2D(0,1),
+                new Vector2D(1,1), new Vector2D(2,1), new Vector2D(1,0) },
 
-                new List<Point2D>(){ new Point2D(2,2), new Point2D(2,1),
-                new Point2D(2,0), new Point2D(1,0), new Point2D(0,0) },
+                new List<Vector2D>(){ new Vector2D(2,2), new Vector2D(2,1),
+                new Vector2D(2,0), new Vector2D(1,0), new Vector2D(0,0) },
 
-                new List<Point2D>(){ new Point2D(0,3), new Point2D(0,2),
-                new Point2D(0,1), new Point2D(0,0) },
+                new List<Vector2D>(){ new Vector2D(0,3), new Vector2D(0,2),
+                new Vector2D(0,1), new Vector2D(0,0) },
 
-                new List<Point2D>(){ new Point2D(0,1), new Point2D(1,1),
-                new Point2D(0,0), new Point2D(1,0) }
+                new List<Vector2D>(){ new Vector2D(0,1), new Vector2D(1,1),
+                new Vector2D(0,0), new Vector2D(1,0) }
             };
-            public HashSet<Point2D> Occupied { private set; get; }
+            public HashSet<Vector2D> Occupied { private set; get; }
             public long RockCount { private set; get; }
             public int ChamberWidth { private set; get; }
             private long towerHeight;
@@ -66,7 +66,7 @@ namespace AdventOfCode
                 towerHeight = 0;
                 addedTowerHeight = 0;
                 cache = new Dictionary<string, Tuple<long, long>>();
-                Occupied = new HashSet<Point2D>();
+                Occupied = new HashSet<Vector2D>();
                 ChamberWidth = chamberWidth;
                 RockCount = 0;
                 moveDown = true;
@@ -79,7 +79,7 @@ namespace AdventOfCode
                 for (long x = 1; x <= ChamberWidth; x++)
                     for (long y = towerHeight; y >= towerHeight - 40 && y >= 1; y--)
                     {
-                        res += (Occupied.Contains(new Point2D(x, y)) ? 1 : 0) * (long)Math.Pow(2, i);
+                        res += (Occupied.Contains(new Vector2D(x, y)) ? 1 : 0) * (long)Math.Pow(2, i);
                         i++;
                     }
                 return res;
@@ -92,12 +92,12 @@ namespace AdventOfCode
                     if (rock is null)
                     {
                         rock = new Rock(rockShapes[rockShapeIndex],
-                            new Point2D(3, towerHeight + 4));
+                            new Vector2D(3, towerHeight + 4));
                         rockShapeIndex = (rockShapeIndex + 1) % rockShapes.Length;
                     }
 
                     // Create a move vector
-                    Point2D pushVector = new Point2D();
+                    Vector2D pushVector = new Vector2D();
                     if (moveDown)
                     {
                         char jetPush = JetPushes[jetPushIndex];
@@ -105,17 +105,17 @@ namespace AdventOfCode
                         switch (jetPush)
                         {
                             case '>':
-                                pushVector = new Point2D(1, 0);
+                                pushVector = new Vector2D(1, 0);
                                 break;
                             case '<':
-                                pushVector = new Point2D(-1, 0);
+                                pushVector = new Vector2D(-1, 0);
                                 break;
                         }
                         moveDown = false;
                     }
                     else
                     {
-                        pushVector = new Point2D(0, -1);
+                        pushVector = new Vector2D(0, -1);
                         moveDown = true;
                     }
 
@@ -179,7 +179,7 @@ namespace AdventOfCode
                 {
                     for (long x = 0; x <= ChamberWidth + 1; x++)
                     {
-                        Point2D point = new Point2D(x, y);
+                        Vector2D point = new Vector2D(x, y);
 
                         if (y == 0 && (x == 0 || x == ChamberWidth + 1))
                         {

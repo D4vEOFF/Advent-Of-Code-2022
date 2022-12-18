@@ -11,23 +11,23 @@ namespace AdventOfCode
     {
         class Motion
         {
-            internal Point2D DirectionVector { get; private set; }
+            internal Vector2D DirectionVector { get; private set; }
             internal int Distance { get; private set; }
             internal Motion(Direction direction, int distance)
             {
                 switch (direction)
                 {
                     case Direction.Up:
-                        DirectionVector = new Point2D(0, 1);
+                        DirectionVector = new Vector2D(0, 1);
                         break;
                     case Direction.Down:
-                        DirectionVector = new Point2D(0, -1);
+                        DirectionVector = new Vector2D(0, -1);
                         break;
                     case Direction.Left:
-                        DirectionVector = new Point2D(-1, 0);
+                        DirectionVector = new Vector2D(-1, 0);
                         break;
                     case Direction.Right:
-                        DirectionVector = new Point2D(1, 0);
+                        DirectionVector = new Vector2D(1, 0);
                         break;
                 }
                 Distance = distance;
@@ -62,7 +62,7 @@ namespace AdventOfCode
                 })
                 .ToArray();
         }
-        private static bool AreNeighbored(Point2D A, Point2D B)
+        private static bool AreNeighbored(Vector2D A, Vector2D B)
         {
             return Math.Abs(A.X - B.X) <= 1 && Math.Abs(A.Y - B.Y) <= 1;
         }
@@ -73,10 +73,10 @@ namespace AdventOfCode
             Motion[] motions = ParseInput(headMovement);
 
             // Initial head and tail position
-            Point2D[] rope = new Point2D[knotCount];
-            rope = rope.Select(x => new Point2D(0, 0)).ToArray();
+            Vector2D[] rope = new Vector2D[knotCount];
+            rope = rope.Select(x => new Vector2D(0, 0)).ToArray();
 
-            HashSet<Point2D> visited = new HashSet<Point2D>();
+            HashSet<Vector2D> visited = new HashSet<Vector2D>();
             visited.Add(rope[knotCount - 1]);
             foreach (var motion in motions)
             {
@@ -88,8 +88,8 @@ namespace AdventOfCode
                     {
                         if (!AreNeighbored(rope[i - 1], rope[i]))
                         {
-                            Point2D diff = rope[i - 1] - rope[i];
-                            rope[i] += new Point2D(Math.Sign(diff.X), 
+                            Vector2D diff = rope[i - 1] - rope[i];
+                            rope[i] += new Vector2D(Math.Sign(diff.X), 
                                 Math.Sign(diff.Y));
                         }
                     }

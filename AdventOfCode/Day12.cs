@@ -12,13 +12,13 @@ namespace AdventOfCode
             public int Elevation { get; private set; }
             public int Distance { get; set; }
             public SquareType Type { get; private set; }
-            public Point2D Position { get; private set; }
+            public Vector2D Position { get; private set; }
             public Square(int elevation, int distance, int x, int y, SquareType type)
             {
                 Elevation = elevation;
                 Distance = distance;
                 Type = type;
-                Position = new Point2D(x, y);
+                Position = new Vector2D(x, y);
             }
         }
         private static Tuple<Square[,], Square> ParseInput(string map)
@@ -64,8 +64,8 @@ namespace AdventOfCode
             predecessor[startSquare] = null;
             queue.Enqueue(startSquare);
 
-            Point2D[] dirs = new Point2D[] { new Point2D(0, -1), new Point2D(0, 1),
-                new Point2D(1, 0), new Point2D(-1, 0) };
+            Vector2D[] dirs = new Vector2D[] { new Vector2D(0, -1), new Vector2D(0, 1),
+                new Vector2D(1, 0), new Vector2D(-1, 0) };
             Square square = squares[0, 0];
             while (queue.Count > 0)
             {
@@ -74,10 +74,10 @@ namespace AdventOfCode
                 if (square.Type == SquareType.Goal)
                     break;
 
-                Point2D pos = square.Position;
+                Vector2D pos = square.Position;
                 foreach (var dir in dirs)
                 {
-                    Point2D toCheck = square.Position + dir;
+                    Vector2D toCheck = square.Position + dir;
                     if (!WithinRange(toCheck.X, toCheck.Y, squares))
                         continue;
 
@@ -117,18 +117,18 @@ namespace AdventOfCode
 
             List<Square> groundSquares = new List<Square>();
 
-            Point2D[] dirs = new Point2D[] { new Point2D(0, -1), new Point2D(0, 1),
-                new Point2D(1, 0), new Point2D(-1, 0) };
+            Vector2D[] dirs = new Vector2D[] { new Vector2D(0, -1), new Vector2D(0, 1),
+                new Vector2D(1, 0), new Vector2D(-1, 0) };
 
             Square square = squares[0, 0];
             while (queue.Count > 0)
             {
                 square = queue.Dequeue();
 
-                Point2D pos = square.Position;
+                Vector2D pos = square.Position;
                 foreach (var dir in dirs)
                 {
-                    Point2D toCheck = square.Position + dir;
+                    Vector2D toCheck = square.Position + dir;
                     if (!WithinRange(toCheck.X, toCheck.Y, squares))
                         continue;
 
