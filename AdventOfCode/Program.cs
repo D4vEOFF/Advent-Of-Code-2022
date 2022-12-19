@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode
+﻿using AdventOfCode.DaysOfCode;
+
+namespace AdventOfCode
 {
     internal class Program
     {
@@ -108,6 +110,10 @@
                     string cubes = File.ReadAllText(inputFolder + "18.txt");
                     Console.WriteLine("Visible faces: " + Day18.GetVisibleFaces(cubes));
                     Console.WriteLine("Visible faces (part 2): " + Day18.GetVisibleFaces2(cubes));
+                    break;
+                case 19:
+                    string blueprints = File.ReadAllText(inputFolder + "19.txt");
+                    Console.WriteLine("Biggest quantity level: " + Day19.GetGeodeQuantityLevel(blueprints));
                     break;
                 default:
                     Console.WriteLine("Invalid day number.");
