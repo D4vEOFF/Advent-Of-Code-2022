@@ -113,7 +113,8 @@ namespace AdventOfCode
                     break;
                 case 19:
                     string blueprints = File.ReadAllText(inputFolder + "19.txt");
-                    Console.WriteLine("Biggest quantity level: " + Day19.GetGeodeQuantityLevel(blueprints));
+                    Console.WriteLine("Biggest quantity level: " + Day19.GetGeodeQuantityLevel(blueprints, 24, false));
+                    Console.WriteLine("Largest number of geodes: " + Day19.GetGeodeQuantityLevel(blueprints, 32, true));
                     break;
                 default:
                     Console.WriteLine("Invalid day number.");
