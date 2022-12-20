@@ -116,6 +116,11 @@ namespace AdventOfCode
                     Console.WriteLine("Biggest quantity level: " + Day19.GetGeodeQuantityLevel(blueprints, 24, false));
                     Console.WriteLine("Largest number of geodes: " + Day19.GetGeodeQuantityLevel(blueprints, 32, true));
                     break;
+                case 20:
+                    string file = File.ReadAllText(inputFolder + "20.txt");
+                    Console.WriteLine("Indeces sum: " + Day20.MixFile(file, 1, 1));
+                    Console.WriteLine("Indeces sum (part 2): " + Day20.MixFile(file, 811589153, 10));
+                    break;
                 default:
                     Console.WriteLine("Invalid day number.");
                     break;
