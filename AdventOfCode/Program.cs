@@ -121,6 +121,11 @@ namespace AdventOfCode
                     Console.WriteLine("Indeces sum: " + Day20.MixFile(file, 1, 1));
                     Console.WriteLine("Indeces sum (part 2): " + Day20.MixFile(file, 811589153, 10));
                     break;
+                case 21:
+                    string monkeys = File.ReadAllText(inputFolder + "21.txt");
+                    Console.WriteLine("Root monkey value: " + Day21.GetRootMonkeyValue(monkeys));
+                    Console.WriteLine("Humn monkey value: " + Day21.GetHumnValue(monkeys));
+                    break;
                 default:
                     Console.WriteLine("Invalid day number.");
                     break;
