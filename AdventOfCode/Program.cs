@@ -126,6 +126,10 @@ namespace AdventOfCode
                     Console.WriteLine("Root monkey value: " + Day21.GetRootMonkeyValue(monkeys));
                     Console.WriteLine("Humn monkey value: " + Day21.GetHumnValue(monkeys));
                     break;
+                case 22:
+                    string mapPath = File.ReadAllText(inputFolder + "22.txt");
+                    Console.WriteLine("Password: " + Day22.GetPassword(mapPath));
+                    break;
                 default:
                     Console.WriteLine("Invalid day number.");
                     break;
