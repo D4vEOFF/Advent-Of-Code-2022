@@ -128,7 +128,12 @@ namespace AdventOfCode
                     break;
                 case 22:
                     string mapPath = File.ReadAllText(inputFolder + "22.txt");
-                    Console.WriteLine("Password: " + Day22.GetPassword(mapPath));
+                    Console.WriteLine("Password: " + Day22.GetPassword(mapPath, false, false));
+                    break;
+                case 23:
+                    string elfMap = File.ReadAllText(inputFolder + "23.txt");
+                    Console.WriteLine("Empty tiles: " + Day23.GetEmptyTiles(elfMap, 10));
+                    Console.WriteLine("No action round: " + Day23.GetNoActionRound(elfMap));
                     break;
                 default:
                     Console.WriteLine("Invalid day number.");

@@ -1,9 +1,4 @@
-﻿
-using AdventOfCode.Utils;
-using Microsoft.Win32.SafeHandles;
-using System;
-using System.Drawing;
-using System.Net.Http.Headers;
+﻿using AdventOfCode.Utilities;
 
 namespace AdventOfCode
 {

@@ -1,4 +1,4 @@
-﻿namespace AdventOfCode.Utils
+﻿namespace AdventOfCode.Utilities
 {
     internal enum Direction
     {
