@@ -135,6 +135,11 @@ namespace AdventOfCode
                     Console.WriteLine("Empty tiles: " + Day23.GetEmptyTiles(elfMap, 10));
                     Console.WriteLine("No action round: " + Day23.GetNoActionRound(elfMap));
                     break;
+                case 24:
+                    string blizzardMap = File.ReadAllText(inputFolder + "24.txt");
+                    Console.WriteLine("Fastest path: " + Day24.GetShortestPath(blizzardMap, 1));
+                    Console.WriteLine("Fastest path (part 2): " + Day24.GetShortestPath(blizzardMap, 3));
+                    break;
                 default:
                     Console.WriteLine("Invalid day number.");
                     break;
