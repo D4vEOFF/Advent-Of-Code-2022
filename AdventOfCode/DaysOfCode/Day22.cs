@@ -50,7 +50,7 @@ namespace AdventOfCode.DaysOfCode
 
             return new Tuple<char[,], string[], Vector2D>(map, path.ToArray(), startTile);
         }
-        internal static int GetPassword(string mapPathStr, bool show, bool cube)
+        internal static int GetPassword(string mapPathStr, bool show)
         {
             Tuple<char[,], string[], Vector2D> input = ParseInput(mapPathStr);
             char[,] map = input.Item1;
@@ -111,44 +111,36 @@ namespace AdventOfCode.DaysOfCode
                 {
                     Vector2D nextPos = pos + dir;
 
-                    // Wrap around an enge of the cube
-                    if (cube)
+                    // Out of range
+                    // Left/right
+                    if (!WithinRange(nextPos.X, 0))
                     {
-                        
+                        nextPos.X = nextPos.X < 0 ? map.GetLength(0) - 1 : 0;
+                        while (map[nextPos.X, nextPos.Y] == ' ')
+                            nextPos.X += dir.X;
                     }
-                    else
+                    // Up/down
+                    else if (!WithinRange(nextPos.Y, 1))
                     {
-                        // Out of range
-                        // Left/right
-                        if (!WithinRange(nextPos.X, 0))
-                        {
-                            nextPos.X = nextPos.X < 0 ? map.GetLength(0) - 1 : 0;
-                            while (map[nextPos.X, nextPos.Y] == ' ')
-                                nextPos.X += dir.X;
-                        }
-                        // Up/down
-                        else if (!WithinRange(nextPos.Y, 1))
-                        {
-                            nextPos.Y = nextPos.Y < 0 ? map.GetLength(1) - 1 : 0;
-                            while (map[nextPos.X, nextPos.Y] == ' ')
-                                nextPos.Y += dir.Y;
-                        }
+                        nextPos.Y = nextPos.Y < 0 ? map.GetLength(1) - 1 : 0;
+                        while (map[nextPos.X, nextPos.Y] == ' ')
+                            nextPos.Y += dir.Y;
+                    }
 
-                        // Off the map
-                        else if (map[nextPos.X, nextPos.Y] == ' ')
-                        {
-                            if (dir == left)
-                                nextPos.Y = map.GetLength(1) - 1;
-                            else if (dir == right)
-                                nextPos.Y = 0;
-                            else if (dir == up)
-                                nextPos.X = map.GetLength(0) - 1;
-                            else if (dir == down)
-                                nextPos.X = 0;
+                    // Off the map
+                    else if (map[nextPos.X, nextPos.Y] == ' ')
+                    {
+                        if (dir == left)
+                            nextPos.Y = map.GetLength(1) - 1;
+                        else if (dir == right)
+                            nextPos.Y = 0;
+                        else if (dir == up)
+                            nextPos.X = map.GetLength(0) - 1;
+                        else if (dir == down)
+                            nextPos.X = 0;
 
-                            while (map[nextPos.X, nextPos.Y] == ' ')
-                                nextPos += dir;
-                        }
+                        while (map[nextPos.X, nextPos.Y] == ' ')
+                            nextPos += dir;
                     }
 
                     // Wall encountered

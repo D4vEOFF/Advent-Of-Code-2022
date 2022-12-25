@@ -128,7 +128,7 @@ namespace AdventOfCode
                     break;
                 case 22:
                     string mapPath = File.ReadAllText(inputFolder + "22.txt");
-                    Console.WriteLine("Password: " + Day22.GetPassword(mapPath, false, false));
+                    Console.WriteLine("Password: " + Day22.GetPassword(mapPath, false));
                     break;
                 case 23:
                     string elfMap = File.ReadAllText(inputFolder + "23.txt");
@@ -139,6 +139,10 @@ namespace AdventOfCode
                     string blizzardMap = File.ReadAllText(inputFolder + "24.txt");
                     Console.WriteLine("Fastest path: " + Day24.GetShortestPath(blizzardMap, 1));
                     Console.WriteLine("Fastest path (part 2): " + Day24.GetShortestPath(blizzardMap, 3));
+                    break;
+                case 25:
+                    string snafuValues = File.ReadAllText(inputFolder + "25.txt");
+                    Console.WriteLine("SNAFU sum: " + Day25.GetSnafuSum(snafuValues));
                     break;
                 default:
                     Console.WriteLine("Invalid day number.");
